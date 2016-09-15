@@ -1,0 +1,4 @@
+69c69
+<                 label = '%s (%.1f%%)' % (slice.name, slice.fraction * 100)
+---
+>                 label = '%s' % (slice.name)

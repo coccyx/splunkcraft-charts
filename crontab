@@ -1,0 +1,1 @@
+*/5 * * * * /data/cron_task.sh /data/chart.py

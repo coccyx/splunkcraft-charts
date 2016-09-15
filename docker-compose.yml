@@ -1,0 +1,65 @@
+version: '2'
+services:
+  bukkit:
+    image: 497289953411.dkr.ecr.us-east-1.amazonaws.com/splunkcraft
+    mem_limit: 2147483648
+    volumes:
+      - /data
+    ports:
+      - 25565:25565
+      - 4711:4711
+    environment:
+      - EULA=true
+      - MINECRAFT_IP=127.0.0.1
+      - CHART_1_QUERY=search eventtype=splunkcraft2016 | timechart span=1d dc(player) AS player
+      - CHART_1_ET=-7d@d
+      - CHART_1_LT=-0d@d
+      - CHART_1_SERIESFIELD=player
+      - CHART_1_VALUEFIELD=player
+      - CHART_1_COLOR=red
+      - CHART_1_TYPE=verticalbar
+      - CHART_1_TITLE=Users last 7d
+      - CHART_1_XOFFSET=0
+      - CHART_1_YOFFSET=0
+      - CHART_1_ZOFFSET=80
+      - CHART_1_ORIENTATION=0
+      - CHART_1_MIRROR=0
+      - CHART_2_QUERY=search eventtype=splunkcraft2016 | timechart span=1d dc(player) AS player
+      - CHART_2_ET=-7d@d
+      - CHART_2_LT=-0d@d
+      - CHART_2_SERIESFIELD=player
+      - CHART_2_VALUEFIELD=player
+      - CHART_2_COLOR=blue
+      - CHART_2_TYPE=line
+      - CHART_2_TITLE=Users last 7d
+      - CHART_2_XOFFSET=0
+      - CHART_2_YOFFSET=0
+      - CHART_2_ZOFFSET=-80
+      - CHART_2_ORIENTATION=0
+      - CHART_2_MIRROR=1
+      - CHART_3_QUERY=search eventtype=splunkcraft2016 | stats count by player | sort limit=10 -count | eval player=substr(player, 1, 5)
+      - CHART_3_SERIESFIELD=player
+      - CHART_3_VALUEFIELD=count
+      - CHART_3_ET=-7d@d
+      - CHART_3_LT=-0d@d
+      - CHART_3_COLOR=green
+      - CHART_3_TYPE=pie
+      - CHART_3_TITLE=Users last 7d
+      - CHART_3_XOFFSET=-80
+      - CHART_3_YOFFSET=0
+      - CHART_3_ZOFFSET=0
+      - CHART_3_ORIENTATION=1
+      - CHART_3_MIRROR=0
+      - CHART_4_QUERY=search eventtype=splunkcraft2016 | stats dc(player) AS player
+      - CHART_4_SERIESFIELD=player
+      - CHART_4_VALUEFIELD=player
+      - CHART_4_ET=-60m
+      - CHART_4_LT=now
+      - CHART_4_COLOR=black
+      - CHART_4_TYPE=singlevalue
+      - CHART_4_TITLE=Current Users
+      - CHART_4_XOFFSET=80
+      - CHART_4_YOFFSET=0
+      - CHART_4_ZOFFSET=0
+      - CHART_4_ORIENTATION=1
+      - CHART_4_MIRROR=1
