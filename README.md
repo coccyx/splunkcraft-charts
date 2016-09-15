@@ -1,3 +1,17 @@
+# Running chart.py
+
+Chart.py renders Splunk charts in Minecraft.  It has a number of dependencies which are required to run it.  Here's a list of commands on Ubuntu which will install them:
+
+	sudo apt-get update && apt-get install -y python-cairo python-pycha python-pil python-pip
+	sudo pip install pypng && pip install splunk-sdk
+	sudo cp raspberryjuice-1.8.jar /<minecraftdir>/plugins/raspberryjuice-1.8.jar
+	sudo cp pycha-pie.diff /<minecraftdir>/pycha-pie.diff
+	sudo patch /usr/share/pyshared/pycha/pie.py /<minecraftdir>/pycha-pie.diff
+	sudo cp chart.py /<minecraftdir>/chart.py
+	sudo cp OpenSans-Regular.ttf /<minecraftdir>/OpenSans-Regular.ttf
+
+
+
 # Docker Bukkit
 ## A Bukkit/Spigot server on docker
 Bukkit, a moddable Minecraft server. On Docker. Neat, huh?
